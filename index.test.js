@@ -1,23 +1,21 @@
-const Telbit = require(".");
+const telbit = require(".");
 
-const bot = new Telbit(process.env.TEST_TOKEN);
-
-bot.onMessage(async (msg, user, chat) =>
+const main = async() =>
 {
-    if(msg.text === "/test")
+    const bot = telbit(process.env.TEST_TOKEN);
+
+    bot.onMessage(async(msg, chat, user) =>
     {
-        await chat.send("Test message");
-        console.log(user._first_name);
+        if(msg.text === "/ping")
+        {
+            const response = await chat.message("pong");
 
-        await chat
-        .send(
-            new bot.Message("Test message with buttons")
-            .addButton("Test button", () => { console.log("Button clicked"); })
-            .addButton("Test button 2", () => { chat.send("Button 2"); })
-        )
+            setTimeout(response.delete.bind(response), 3000);
 
-        const message2 = new bot.Message("Test message 2", { duration: 3000 });
+            const res2 = await chat.message("mensaje 2");
+            setTimeout(()=>res2.edit("mensaje 3!"), 3000);
+        }
+    })
+}
 
-        await message2.sendTo(chat);
-    }
-});
+main();

@@ -122,3 +122,68 @@ Esta es la versión **1.0.0**, desarrollada en una tarde como una base simple pe
 Seguiré mejorándola, añadiendo nuevas opciones y corrigiendo errores pronto.
 
 Si encuentras algún problema o tienes sugerencias, ¡házmelo saber!
+
+
+---
+
+Para la proxima version hay que cambiar un poco la estructura para adaptarla a un modelo más asincrono que declarativo.
+
+const bot = await telbit(TOKEN_KEY);
+const chat = await bot.chat(1234556789);
+
+const message = await chat.message("my text");
+
+await message.edit("another text");
+await message.delete();
+
+bot.onMessage = (message, chat, user) =>
+{
+    if(message.text === "super bad word")
+    {
+        await chat.ban(user);
+        setTimeout(() => chat.unban(user), 100000)
+    }
+    else if(message.text === "soft bad word")
+    {
+        await chat.permisions(user, { write: false });
+        setTimeout(() => chat.permisions(user, { write: true }), 100000);
+    }
+    else
+    {
+        await chat.send("Hello world!");
+    }
+}
+
+Obvio que todo con sus catchs respectivos para manejar los errores
+
+
+Ergo tendrimos
+
+bot:
+- onMessage //setter para evento de mensaje general;
+- chat // method para crear un chat a partir de un id;
+- me // getter con el usuario correspondiente a nuestro bot;
+
+chat:
+- id // getter del id del chat
+- onMessage // setter para evento de mensaje espesífico para este chat;
+- message // method para crear y enviar un mensaje
+- ban // method para banear un usuario del chat
+- unban // method para desbanear un usuario del chat
+- kick // method para echar a un usuario del chat
+- permisions // method para modificar los permisos de un usuario del chat
+
+message:
+- id // getter con el id del mensaje
+- edit // method para editar el mensaje enviado;
+- delete // method para eliminar el mensaje enviado;
+- text // getter con el texto enviado
+- user // getter con el usuario emisor (type telbit.user);
+- time // getter con el tiempo de emisión
+
+user: // solo getters
+- id
+- username
+- firstname
+- lastname
+- bot
