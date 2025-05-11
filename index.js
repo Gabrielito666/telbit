@@ -66,13 +66,13 @@ const TelbitClass = require("./lib/telbit");
 /**
  * 
  * @param {string} BOT_TOKEN 
- * @returns {TelbitClass}
+ * @returns {Telbit}
  */
 const telbit = (BOT_TOKEN) =>
 {
     try
     {
-        return new Telbit(BOT_TOKEN);
+        return new TelbitClass(BOT_TOKEN);
     }
     catch(err)
     {
