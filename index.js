@@ -61,12 +61,12 @@
  * @property {(callback: (error: Error) => void) => Telbit} onError - Callback general de errores
 */
 
-const Telbit = require("./lib/telbit");
+const TelbitClass = require("./lib/telbit");
 
 /**
  * 
  * @param {string} BOT_TOKEN 
- * @returns {Telbit}
+ * @returns {TelbitClass}
  */
 const telbit = (BOT_TOKEN) =>
 {
