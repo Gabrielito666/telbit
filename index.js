@@ -1,3 +1,4 @@
+/// <reference path="./lib/types/index.d.ts" />
 const Telbit = require("./lib/telbit");
 
 /**
