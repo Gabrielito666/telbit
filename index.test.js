@@ -4,7 +4,6 @@ const main = async() =>
 {
     const bot = telbit(process.env.TEST_TOKEN);
 
-
     const mutePermissions = bot.permissionsFactory(false);
     const unmutePermissions = bot.permissionsFactory(true);
 
@@ -78,7 +77,6 @@ const main = async() =>
         await chat.message("fin de estas pruebas");
 
     });
-
 
     bot.listeners.emitter.on("error", console.log);
 }

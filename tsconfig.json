@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "allowJs": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": ["./lib/types", "./node_modules/@types"]
+  },
+  "include": ["./lib/**/*", "./index.js", "./index.test.js"]
+}
